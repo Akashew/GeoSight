@@ -22,4 +22,27 @@ public class EarthquakeController {
     public List<Earthquake> getAllEarthquakes() {
         return earthquakeService.getAllEarthquakes();
     }
+
+    @GetMapping("/{id}")
+    public Earthquake getEarthquakeById(@PathVariable String id) {
+        return earthquakeService.getEarthquakeById(id);
+    }
+
+    @PostMapping
+    public Earthquake createEarthquake(@RequestBody Earthquake earthquake) {
+        return earthquakeService.saveEarthquake(earthquake);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteEarthquake(@PathVariable String id) {
+        earthquakeService.deleteEarthquake(id);
+    }
+
+    @PutMapping("/{id}")
+    public Earthquake updateEarthquake(@PathVariable String id, @RequestBody Earthquake earthquake) {
+        return earthquakeService.updateEarthquake(id, earthquake);
+    }
+
+
+
 }

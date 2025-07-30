@@ -1,22 +1,29 @@
 package com.geosight.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "earthquakes")
 public class Earthquake {
     @Id
     private String id;
-    private String time;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime time;
+
     private double latitude;
     private double longitude;
     private double depth;
     private double magnitude;
     private String place;
 
-    
+    // Getters and setters
+
     public String getId() { 
         return id; 
     }
@@ -25,11 +32,11 @@ public class Earthquake {
         this.id = id; 
     }
 
-    public String getTime() { 
+    public LocalDateTime getTime() { 
         return time; 
     }
 
-    public void setTime(String time) { 
+    public void setTime(LocalDateTime time) { 
         this.time = time; 
     }
 

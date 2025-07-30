@@ -21,6 +21,38 @@ public class EarthquakeService {
         return earthquakeRepository.findAll();
     }
 
+    public Earthquake getEarthquakeById(String id) {
+        return earthquakeRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Earthquake not found with id: " + id));
+    }
+
+    public Earthquake saveEarthquake(Earthquake earthquake) {
+        return earthquakeRepository.save(earthquake);
+    }
+
+    public void deleteEarthquake(String id) {
+        if (!earthquakeRepository.existsById(id)) {
+            throw new RuntimeException("Earthquake not found with id " + id);
+        }
+        earthquakeRepository.deleteById(id);
+    }
+
+    public Earthquake updateEarthquake(String id, Earthquake updatedEarthquake) {
+        Earthquake existingEarthquake = earthquakeRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Earthquake not found with id: " + id));
+    
+        existingEarthquake.setTime(updatedEarthquake.getTime());
+        existingEarthquake.setLatitude(updatedEarthquake.getLatitude());
+        existingEarthquake.setLongitude(updatedEarthquake.getLongitude());
+        existingEarthquake.setDepth(updatedEarthquake.getDepth());
+        existingEarthquake.setMagnitude(updatedEarthquake.getMagnitude());
+        existingEarthquake.setPlace(updatedEarthquake.getPlace());
+
+        return earthquakeRepository.save(existingEarthquake);
+    }
+
+
+
     // Optional: Add other methods like getById, filterByMagnitude, etc.
 }
 
