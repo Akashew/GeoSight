@@ -4,6 +4,9 @@ import com.geosight.backend.model.Earthquake;
 import com.geosight.backend.service.EarthquakeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -44,5 +47,16 @@ public class EarthquakeController {
     }
 
 
+    @GetMapping("/search")
+    public Page<Earthquake> searchEarthquakes(
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "10") int size,
+        @RequestParam(defaultValue = "0.0") double minMagnitude,
+        @RequestParam(defaultValue = "10.0") double maxMagnitude,
+        @RequestParam(defaultValue = "") String place
+    ) {
+        Pageable pageable = PageRequest.of(page, size);
+        return earthquakeService.getFilteredEarthquakes(minMagnitude, maxMagnitude, place, pageable);
+    }
 
 }
