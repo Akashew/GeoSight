@@ -50,12 +50,12 @@ public class EarthquakeClusterController {
     public Page<EarthquakeCluster> searchClusters(
         @RequestParam(defaultValue = "0") int page,
         @RequestParam(defaultValue = "10") int size,
-        @RequestParam(defaultValue = "-90.0") double minLat,
-        @RequestParam(defaultValue = "90.0") double maxLat,
-        @RequestParam(defaultValue = "-180.0") double minLon,
-        @RequestParam(defaultValue = "180.0") double maxLon,
-        @RequestParam(defaultValue = "0") int minSize,
-        @RequestParam(defaultValue = "1000") int maxSize
+        @RequestParam(required = false) Double minLat,
+        @RequestParam(required = false) Double maxLat,
+        @RequestParam(required = false) Double minLon,
+        @RequestParam(required = false) Double maxLon,
+        @RequestParam(required = false) Integer minSize,
+        @RequestParam(required = false) Integer maxSize
     ) {
         Pageable pageable = PageRequest.of(page, size);
         return service.getFilteredClusters(minLat, maxLat, minLon, maxLon, minSize, maxSize, pageable);
