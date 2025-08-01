@@ -1,6 +1,10 @@
 C:\Users\akash\GeoSight\backend\src\main\java\com\geosight\backend\config\DatabaseConfig.java
+C:\Users\akash\GeoSight\backend\src\main\java\com\geosight\backend\controller\EarthquakeClusterController.java
 C:\Users\akash\GeoSight\backend\src\main\java\com\geosight\backend\controller\EarthquakeController.java
 C:\Users\akash\GeoSight\backend\src\main\java\com\geosight\backend\GeoSightbackendApplication.java
 C:\Users\akash\GeoSight\backend\src\main\java\com\geosight\backend\model\Earthquake.java
+C:\Users\akash\GeoSight\backend\src\main\java\com\geosight\backend\model\EarthquakeCluster.java
+C:\Users\akash\GeoSight\backend\src\main\java\com\geosight\backend\repository\EarthquakeClusterRepository.java
 C:\Users\akash\GeoSight\backend\src\main\java\com\geosight\backend\repository\EarthquakeRepository.java
+C:\Users\akash\GeoSight\backend\src\main\java\com\geosight\backend\service\EarthquakeClusterService.java
 C:\Users\akash\GeoSight\backend\src\main\java\com\geosight\backend\service\EarthquakeService.java

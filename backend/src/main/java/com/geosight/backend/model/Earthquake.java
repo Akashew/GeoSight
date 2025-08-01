@@ -22,7 +22,6 @@ public class Earthquake {
     private double magnitude;
     private String place;
 
-    // Getters and setters
 
     public String getId() { 
         return id; 

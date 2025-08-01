@@ -1,6 +1,10 @@
+com\geosight\backend\model\EarthquakeCluster.class
 com\geosight\backend\service\EarthquakeService.class
 com\geosight\backend\GeoSightbackendApplication.class
+com\geosight\backend\controller\EarthquakeClusterController.class
 com\geosight\backend\controller\EarthquakeController.class
 com\geosight\backend\model\Earthquake.class
+com\geosight\backend\service\EarthquakeClusterService.class
+com\geosight\backend\repository\EarthquakeClusterRepository.class
 com\geosight\backend\repository\EarthquakeRepository.class
 com\geosight\backend\config\DatabaseConfig.class
