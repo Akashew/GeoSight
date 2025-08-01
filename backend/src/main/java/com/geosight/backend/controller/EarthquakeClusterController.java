@@ -4,6 +4,9 @@ import com.geosight.backend.model.EarthquakeCluster;
 import com.geosight.backend.service.EarthquakeClusterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -24,7 +27,7 @@ public class EarthquakeClusterController {
     }
 
     @GetMapping("/{id}")
-    public EarthquakeCluster getClusterById(@PathVariable Long id) {
+    public EarthquakeCluster getClusterById(@PathVariable Integer id) {
         return service.getClusterById(id);
     }
 
@@ -34,12 +37,27 @@ public class EarthquakeClusterController {
     }
 
     @PutMapping("/{id}")
-    public EarthquakeCluster updateCluster(@PathVariable Long id, @RequestBody EarthquakeCluster updatedCluster) {
-        return service.updateCluster(id, updatedCluster);
+    public EarthquakeCluster updateCluster(@PathVariable Integer id, @RequestBody EarthquakeCluster cluster) {
+        return service.updateCluster(id, cluster);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCluster(@PathVariable Long id) {
+    public void deleteCluster(@PathVariable Integer id) {
         service.deleteCluster(id);
+    }
+
+    @GetMapping("/search")
+    public Page<EarthquakeCluster> searchClusters(
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "10") int size,
+        @RequestParam(defaultValue = "-90.0") double minLat,
+        @RequestParam(defaultValue = "90.0") double maxLat,
+        @RequestParam(defaultValue = "-180.0") double minLon,
+        @RequestParam(defaultValue = "180.0") double maxLon,
+        @RequestParam(defaultValue = "0") int minSize,
+        @RequestParam(defaultValue = "1000") int maxSize
+    ) {
+        Pageable pageable = PageRequest.of(page, size);
+        return service.getFilteredClusters(minLat, maxLat, minLon, maxLon, minSize, maxSize, pageable);
     }
 }
