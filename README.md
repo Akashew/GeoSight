@@ -92,6 +92,13 @@ cd GeoSight
 
 ### 2. Set up the Python environment (for data processing and clustering)
 
+```env
+DB_HOST=localhost
+DB_NAME=GeoSight
+DB_USER=
+DB_PASSWORD=
+```
+
 ```bash
 python -m venv venv
 
@@ -105,6 +112,12 @@ pip install -r requirements.txt
 ```
 
 ### 3. Run the backend
+
+```env
+DB_URL=jdbc:postgresql://localhost:5432/GeoSight
+DB_USERNAME=
+DB_PASSWORD=
+```
 
 ```bash
 cd backend
