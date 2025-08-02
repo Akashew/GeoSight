@@ -78,7 +78,7 @@ ETL --> EarthquakeDB[PostgreSQL: earthquakes]
     end
 ```
 
-## 🛠️ Setup Instructions
+##  Setup Instructions
 
 Follow these steps to get the project running after cloning the repository.
 
