@@ -1,6 +1,6 @@
 # GeoSight: Earthquake Visualization Platform
 
-GeoSight Lite is an interactive full-stack web platform that visualizes recent earthquake data from the USGS. It identifies earthquake hotspots using clustering algorithms and provides a clean, intuitive map interface for exploring seismic activity.
+GeoSight is an interactive full-stack web platform that visualizes recent earthquake data from the USGS. It identifies earthquake hotspots using clustering algorithms and provides a clean, intuitive map interface for exploring seismic activity.
 
 ---
 
