@@ -13,7 +13,7 @@ public class DatabaseConfig {
     @Bean
     public DataSource dataSource() {
         Dotenv dotenv = Dotenv.configure()
-                              .directory(".") // Changed from "./backend" to "."
+                              .directory(".") 
                               .ignoreIfMalformed()
                               .ignoreIfMissing()
                               .load();
@@ -22,7 +22,7 @@ public class DatabaseConfig {
                 .url(dotenv.get("DB_URL"))
                 .username(dotenv.get("DB_USERNAME"))
                 .password(dotenv.get("DB_PASSWORD"))
-                .driverClassName("org.postgresql.Driver") // Added this for clarity
+                .driverClassName("org.postgresql.Driver") 
                 .build();
     }
 }
