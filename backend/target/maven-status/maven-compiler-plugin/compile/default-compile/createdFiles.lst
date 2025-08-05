@@ -1,6 +1,8 @@
-com\geosight\backend\model\EarthquakeCluster.class
 com\geosight\backend\service\EarthquakeService.class
 com\geosight\backend\GeoSightbackendApplication.class
+com\geosight\backend\config\CorsConfig.class
+com\geosight\backend\config\CorsConfig$1.class
+com\geosight\backend\model\EarthquakeCluster.class
 com\geosight\backend\controller\EarthquakeClusterController.class
 com\geosight\backend\controller\EarthquakeController.class
 com\geosight\backend\model\Earthquake.class
