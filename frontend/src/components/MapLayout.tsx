@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { LatLngBounds } from "leaflet";
+import { LatLngBounds, DivIcon } from "leaflet"; // Added DivIcon import
 import MarkerClusterGroup from "react-leaflet-cluster";
 import "leaflet/dist/leaflet.css";
 import "../css/MapLayout.css";
@@ -15,6 +15,21 @@ export default function MapLayout() {
     [-90, -180], // Southwest corner
     [90, 180] // Northeast corner
   );
+
+  const createDiamondMarker = (magnitude: number) => {
+    let magnitudeClass = "";
+    if (magnitude >= 5) magnitudeClass = "magnitude-high";
+    else if (magnitude >= 2) magnitudeClass = "magnitude-medium";
+    else magnitudeClass = "magnitude-low";
+
+    return new DivIcon({
+      className: "custom-earthquake-marker",
+      html: `<div class="diamond-marker ${magnitudeClass}"></div>`,
+      iconSize: [24, 24],
+      iconAnchor: [12, 12],
+      popupAnchor: [0, -12],
+    });
+  };
 
   useEffect(() => {
     fetchEarthquakes()
@@ -41,7 +56,11 @@ export default function MapLayout() {
 
       <MarkerClusterGroup>
         {earthquakes.map((eq) => (
-          <Marker key={eq.id} position={[eq.latitude, eq.longitude]}>
+          <Marker
+            key={eq.id}
+            position={[eq.latitude, eq.longitude]}
+            icon={createDiamondMarker(eq.magnitude)}
+          >
             <Popup>
               <strong>{eq.place}</strong>
               <br />

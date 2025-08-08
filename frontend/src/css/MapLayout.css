@@ -6,3 +6,59 @@
   left: 0;
   z-index: 1;
 }
+
+.custom-earthquake-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+.diamond-marker {
+  width: 20px;
+  height: 20px;
+  background-color: #ff4444;
+  border: 2px solid #ffffff;
+  transform: rotate(45deg);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.diamond-marker::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-45deg);
+  width: 4px;
+  height: 4px;
+  background-color: #ffffff;
+  border-radius: 50%;
+}
+
+/* Colors based on magnitude level */
+.diamond-marker.magnitude-low {
+  background-color: #4caf50; /* (<2.0) */
+}
+
+.diamond-marker.magnitude-medium {
+  background-color: #ff9800; /* 2.0 to 4.99) */
+}
+
+.diamond-marker.magnitude-high {
+  background-color: #f44336; /* (>=5.0) */
+}
+
+.diamond-marker {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(255, 68, 68, 0.7);
+  }
+  70% {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 8px rgba(255, 68, 68, 0);
+  }
+  100% {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(255, 68, 68, 0);
+  }
+}
