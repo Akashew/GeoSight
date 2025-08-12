@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Column;
 
 import java.time.LocalDateTime;
 
@@ -21,6 +22,9 @@ public class Earthquake {
     private double depth;
     private double magnitude;
     private String place;
+
+    @Column(name = "cluster_id") 
+    private Long clusterId;
 
 
     public String getId() { 
@@ -77,5 +81,13 @@ public class Earthquake {
 
     public void setPlace(String place) { 
         this.place = place; 
+    }
+
+    public Long getClusterId() {
+        return clusterId;
+    }
+
+    public void setClusterId(Long clusterId) {
+        this.clusterId = clusterId;
     }
 }

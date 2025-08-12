@@ -63,6 +63,10 @@ public class EarthquakeService {
         return earthquakeRepository.findByMagnitudeBetweenAndPlaceContainingIgnoreCase(minMag, maxMag, place, pageable);
     }
 
+    public Page<Earthquake> getEarthquakesByClusterId(Long clusterId, Pageable pageable) {
+        return earthquakeRepository.findByClusterId(clusterId, pageable);
+    }
+
     // Optional: Add other methods like getById, filterByMagnitude, etc.
 }
 

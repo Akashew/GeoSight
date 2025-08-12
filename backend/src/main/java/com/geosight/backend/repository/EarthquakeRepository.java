@@ -13,5 +13,7 @@ public interface EarthquakeRepository extends JpaRepository<Earthquake, String>{
     Page<Earthquake> findByMagnitudeBetweenAndPlaceContainingIgnoreCase(
         double minMagnitude, double maxMagnitude, String place, Pageable pageable
     );
+
+    Page<Earthquake> findByClusterId(Long clusterId, Pageable pageable);
     
 }

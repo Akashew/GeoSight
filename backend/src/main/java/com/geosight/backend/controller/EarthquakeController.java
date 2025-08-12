@@ -59,4 +59,16 @@ public class EarthquakeController {
         return earthquakeService.getFilteredEarthquakes(minMagnitude, maxMagnitude, place, pageable);
     }
 
+    @GetMapping("/cluster/{clusterId}")
+    public Page<Earthquake> getEarthquakesByClusterId(
+        @PathVariable Long clusterId,
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "10") int size
+    ) {
+        Pageable pageable = PageRequest.of(page, size);
+        return earthquakeService.getEarthquakesByClusterId(clusterId, pageable);
+    }
+
+
+
 }
