@@ -1,11 +1,20 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import "leaflet/dist/leaflet.css";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import WelcomePage from "./components/WelcomePage";
+import MapLayout from "./components/MapLayout"; // your existing map page
 import "./index.css";
-import App from "./App.tsx";
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
+const rootElement = document.getElementById("root");
+if (!rootElement) throw new Error("Root element not found");
+
+ReactDOM.createRoot(rootElement).render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<WelcomePage />} />
+        <Route path="/api/earthquakes" element={<MapLayout />} />
+      </Routes>
+    </BrowserRouter>
+  </React.StrictMode>
 );
