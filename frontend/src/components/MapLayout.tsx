@@ -74,8 +74,8 @@ export default function MapLayout() {
 
   return (
     <MapContainer
-      center={[37.7749, -122.4194]}
-      zoom={4}
+      center={[37.7749, 200]}
+      zoom={2}
       scrollWheelZoom={true}
       className="map-container"
       minZoom={2}
