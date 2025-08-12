@@ -1,7 +1,9 @@
 package com.geosight.backend.controller;
 
 import com.geosight.backend.model.EarthquakeCluster;
+import com.geosight.backend.model.Earthquake;
 import com.geosight.backend.service.EarthquakeClusterService;
+import com.geosight.backend.service.EarthquakeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
@@ -14,36 +16,38 @@ import java.util.List;
 @RequestMapping("/api/earthquake_clusters")
 public class EarthquakeClusterController {
 
-    private final EarthquakeClusterService service;
+    private final EarthquakeClusterService clusterService;
+    private final EarthquakeService earthquakeService;
 
     @Autowired
-    public EarthquakeClusterController(EarthquakeClusterService service) {
-        this.service = service;
+    public EarthquakeClusterController(EarthquakeClusterService clusterService, EarthquakeService earthquakeService) {
+        this.clusterService = clusterService;
+        this.earthquakeService = earthquakeService;
     }
 
     @GetMapping
     public List<EarthquakeCluster> getAllClusters() {
-        return service.getAllClusters();
+        return clusterService.getAllClusters();
     }
 
     @GetMapping("/{id}")
     public EarthquakeCluster getClusterById(@PathVariable Integer id) {
-        return service.getClusterById(id);
+        return clusterService.getClusterById(id);
     }
 
     @PostMapping
     public EarthquakeCluster createCluster(@RequestBody EarthquakeCluster cluster) {
-        return service.createCluster(cluster);
+        return clusterService.createCluster(cluster);
     }
 
     @PutMapping("/{id}")
     public EarthquakeCluster updateCluster(@PathVariable Integer id, @RequestBody EarthquakeCluster cluster) {
-        return service.updateCluster(id, cluster);
+        return clusterService.updateCluster(id, cluster);
     }
 
     @DeleteMapping("/{id}")
     public void deleteCluster(@PathVariable Integer id) {
-        service.deleteCluster(id);
+        clusterService.deleteCluster(id);
     }
 
     @GetMapping("/search")
@@ -58,6 +62,16 @@ public class EarthquakeClusterController {
         @RequestParam(required = false) Integer maxSize
     ) {
         Pageable pageable = PageRequest.of(page, size);
-        return service.getFilteredClusters(minLat, maxLat, minLon, maxLon, minSize, maxSize, pageable);
+        return clusterService.getFilteredClusters(minLat, maxLat, minLon, maxLon, minSize, maxSize, pageable);
+    }
+    
+    @GetMapping("/{clusterId}/earthquakes")
+    public Page<Earthquake> getEarthquakesByCluster(
+        @PathVariable Long clusterId,
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "10") int size
+    ) {
+        Pageable pageable = PageRequest.of(page, size);
+        return earthquakeService.getEarthquakesByClusterId(clusterId, pageable);
     }
 }
