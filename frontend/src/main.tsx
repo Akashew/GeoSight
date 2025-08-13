@@ -2,7 +2,8 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import WelcomePage from "./components/WelcomePage";
-import MapLayout from "./components/MapLayout"; // your existing map page
+import MapLayout from "./components/MapLayout";
+//import ClusterHotspots from "./components/ClusterHotspots";
 import "./index.css";
 
 const rootElement = document.getElementById("root");

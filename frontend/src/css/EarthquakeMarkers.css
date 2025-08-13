@@ -1,13 +1,4 @@
-.map-container {
-  height: 100vh;
-  width: 100vw;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1;
-}
-
-/*.custom-earthquake-marker {
+.custom-earthquake-marker {
   background: transparent !important;
   border: none !important;
 }
@@ -35,23 +26,22 @@
 }
 
 /* Colors based on magnitude level */
-
-/*.diamond-marker.magnitude-low {
-  background-color: #4caf50; /* (<2.0) */
-/*}
+.diamond-marker.magnitude-low {
+  background-color: #4caf50;
+}
 
 .diamond-marker.magnitude-medium {
-  background-color: #ff9800; /* 2.0 to 4.99) */
-/*}
+  background-color: #ff9800;
+}
 
 .diamond-marker.magnitude-high {
-  background-color: #f44336; /* (>=5.0) */
-/*}
+  background-color: #f44336;
+}
 
 .diamond-marker {
   animation: pulse 2s infinite;
-}*/
-/*
+}
+
 @keyframes pulse {
   0% {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(255, 68, 68, 0.7);
@@ -63,4 +53,3 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(255, 68, 68, 0);
   }
 }
-*/
