@@ -18,8 +18,7 @@ export default function HotspotMarkers() {
   const getClusterSizeCategory = (size: number): string => {
     if (size < 1000) return "small";
     if (size < 3000) return "medium";
-    if (size < 7000) return "large";
-    return "extra-large";
+    return "large";
   };
 
   const calculateMarkerSize = (size: number): number => {
