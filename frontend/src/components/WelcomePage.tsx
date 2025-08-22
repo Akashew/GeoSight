@@ -9,15 +9,22 @@ export default function WelcomePage() {
         Welcome to GeoSight
       </h1>
       <p className="text-lg mb-10 text-gray-700 max-w-xl text-center">
-        Explore earthquake activity and discover seismic hotspots from around
-        the world.
+        Explore earthquake activity or discover seismic hotspots.
       </p>
-      <button
-        onClick={() => navigate("/api/earthquakes")}
-        className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg shadow-lg text-lg"
-      >
-        Enter Map
-      </button>
+      <div className="flex gap-4">
+        <button
+          onClick={() => navigate("/map/earthquakes")}
+          className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg shadow-lg text-lg"
+        >
+          Earthquake Mode
+        </button>
+        <button
+          onClick={() => navigate("/map/hotspots")}
+          className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg shadow-lg text-lg"
+        >
+          Hotspot Mode
+        </button>
+      </div>
     </div>
   );
 }

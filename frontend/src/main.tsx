@@ -14,7 +14,7 @@ ReactDOM.createRoot(rootElement).render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<WelcomePage />} />
-        <Route path="/api/earthquakes" element={<MapLayout />} />
+        <Route path="/map/:mode" element={<MapLayout />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

@@ -1,10 +1,112 @@
 .custom-cluster-marker {
-  border-radius: 50%;
+  background: transparent !important;
+  border: none !important;
+}
+
+.cluster-marker {
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   font-weight: bold;
-  border: 2px solid darkred;
-  background: rgba(255, 0, 0, 0.6);
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  animation: pulse 2s infinite;
+}
+
+/* Size-based classes */
+.cluster-marker.small {
+  background-color: #ffeb3b; /* Yellow for small clusters */
+}
+
+.cluster-marker.medium {
+  background-color: #ff9800; /* Orange for medium clusters */
+}
+
+.cluster-marker.large {
+  background-color: #f44336; /* Red for large clusters */
+}
+
+.cluster-marker.extra-large {
+  background-color: #9c27b0; /* Purple for very large clusters */
+}
+
+/* Pulse animation with dynamic colors */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(255, 255, 255, 0.6);
+  }
+  70% {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 8px rgba(255, 255, 255, 0);
+  }
+  100% {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+/* Different pulse colors for each size category */
+.cluster-marker.small {
+  animation: pulse-yellow 2s infinite;
+}
+
+.cluster-marker.medium {
+  animation: pulse-orange 2s infinite;
+}
+
+.cluster-marker.large {
+  animation: pulse-red 2s infinite;
+}
+
+.cluster-marker.extra-large {
+  animation: pulse-purple 2s infinite;
+}
+
+@keyframes pulse-yellow {
+  0% {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(255, 235, 59, 0.6);
+  }
+  70% {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 8px rgba(255, 235, 59, 0);
+  }
+  100% {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(255, 235, 59, 0);
+  }
+}
+
+@keyframes pulse-orange {
+  0% {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(255, 152, 0, 0.6);
+  }
+  70% {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 8px rgba(255, 152, 0, 0);
+  }
+  100% {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(255, 152, 0, 0);
+  }
+}
+
+@keyframes pulse-red {
+  0% {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(244, 67, 54, 0.6);
+  }
+  70% {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 8px rgba(244, 67, 54, 0);
+  }
+  100% {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(244, 67, 54, 0);
+  }
+}
+
+@keyframes pulse-purple {
+  0% {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(156, 39, 176, 0.6);
+  }
+  70% {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 8px rgba(156, 39, 176, 0);
+  }
+  100% {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(156, 39, 176, 0);
+  }
 }

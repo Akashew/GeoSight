@@ -1,46 +1,13 @@
 import { useEffect, useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { Marker, Popup } from "react-leaflet";
 import { DivIcon } from "leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
-import "leaflet/dist/leaflet.css";
+import type { EarthquakeCluster } from "../types/EarthquakeHotspot";
+import { fetchClusters } from "../api/EarthquakeHotspotApi";
+import "../css/ClusterHotspot.css";
 
-type EarthquakeCluster = {
-  id: number;
-  latitude: number;
-  longitude: number;
-  clusterSize: number;
-};
-
-async function fetchClusters(): Promise<EarthquakeCluster[]> {
-  const res = await fetch("http://localhost:8080/api/earthquake_clusters");
-  if (!res.ok) throw new Error("Failed to fetch earthquake clusters");
-  return res.json();
-}
-
-export default function ClusterHotspotPage() {
+export default function HotspotMarkers() {
   const [clusters, setClusters] = useState<EarthquakeCluster[]>([]);
-
-  // Custom marker icon for clusters (e.g. circle with size scaled by clusterSize)
-  const createClusterMarker = (size: number) => {
-    return new DivIcon({
-      className: "custom-cluster-marker",
-      html: `<div style="
-        background: rgba(255, 0, 0, 0.6);
-        border-radius: 50%;
-        width: ${20 + size * 3}px;
-        height: ${20 + size * 3}px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-weight: bold;
-        border: 2px solid darkred;
-      ">${size}</div>`,
-      iconSize: [20 + size * 3, 20 + size * 3],
-      iconAnchor: [(20 + size * 3) / 2, (20 + size * 3) / 2],
-      popupAnchor: [0, -((20 + size * 3) / 2)],
-    });
-  };
 
   useEffect(() => {
     fetchClusters()
@@ -48,39 +15,70 @@ export default function ClusterHotspotPage() {
       .catch((err) => console.error("Failed to load clusters:", err));
   }, []);
 
-  return (
-    <MapContainer
-      center={[37.7749, -122.4194]}
-      zoom={2}
-      scrollWheelZoom={true}
-      style={{ height: "100vh", width: "100%" }}
-    >
-      <TileLayer
-        attribution="&copy; OpenStreetMap contributors"
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
+  const getClusterSizeCategory = (size: number): string => {
+    if (size < 1000) return "small";
+    if (size < 3000) return "medium";
+    if (size < 7000) return "large";
+    return "extra-large";
+  };
 
-      <MarkerClusterGroup>
-        {clusters.map((cluster) => (
-          <Marker
-            key={cluster.id}
-            position={[cluster.latitude, cluster.longitude]}
-            icon={createClusterMarker(cluster.clusterSize)}
-          >
-            <Popup>
-              <div>
-                <strong>Cluster ID: {cluster.id}</strong>
-                <br />
-                Size: {cluster.clusterSize}
-                <br />
-                Lat: {cluster.latitude.toFixed(4)}
-                <br />
-                Lon: {cluster.longitude.toFixed(4)}
-              </div>
-            </Popup>
-          </Marker>
-        ))}
-      </MarkerClusterGroup>
-    </MapContainer>
+  const calculateMarkerSize = (size: number): number => {
+    // Tiered scaling approach
+    if (size < 1000) {
+      return Math.round(20 + (size / 1000) * 20); // 20-40px for <1000
+    } else if (size < 5000) {
+      return Math.round(40 + ((size - 1000) / 4000) * 30); // 40-70px for 1000-5000
+    } else if (size < 10000) {
+      return Math.round(70 + ((size - 5000) / 5000) * 20); // 70-90px for 5000-10000
+    } else {
+      return Math.round(90 + Math.min(30, ((size - 10000) / 10000) * 30)); // 90-120px for >10000
+    }
+  };
+
+  const createClusterMarker = (size: number) => {
+    const markerSize = calculateMarkerSize(size);
+    const fontSize = Math.max(10, markerSize / 3);
+    const sizeCategory = getClusterSizeCategory(size);
+
+    return new DivIcon({
+      className: "custom-cluster-marker",
+      html: `<div class="cluster-marker ${sizeCategory}" style="
+        width: ${markerSize}px;
+        height: ${markerSize}px;
+        line-height: ${markerSize}px;
+        font-size: ${fontSize}px;
+      ">${size.toLocaleString()}</div>`,
+      iconSize: [markerSize, markerSize],
+      iconAnchor: [markerSize / 2, markerSize / 2],
+      popupAnchor: [0, -markerSize / 2],
+    });
+  };
+
+  return (
+    <MarkerClusterGroup>
+      {clusters.map((cluster) => (
+        <Marker
+          key={cluster.id}
+          position={[cluster.latitude, cluster.longitude]}
+          icon={createClusterMarker(cluster.clusterSize)}
+        >
+          <Popup>
+            <div style={{ minWidth: "200px" }}>
+              <strong>Earthquake Hotspot</strong>
+              <br />
+              <strong>Cluster Size:</strong>{" "}
+              {cluster.clusterSize.toLocaleString()} earthquakes
+              <br />
+              <strong>Location:</strong> {cluster.latitude.toFixed(4)}°,{" "}
+              {cluster.longitude.toFixed(4)}°
+              <br />
+              <small>
+                This hotspot contains {cluster.clusterSize} earthquake events
+              </small>
+            </div>
+          </Popup>
+        </Marker>
+      ))}
+    </MarkerClusterGroup>
   );
 }
