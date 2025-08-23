@@ -7,60 +7,56 @@
   z-index: 1;
 }
 
-/*.custom-earthquake-marker {
-  background: transparent !important;
-  border: none !important;
-}
-
-.diamond-marker {
-  width: 20px;
-  height: 20px;
-  background-color: #ff4444;
-  border: 2px solid #ffffff;
-  transform: rotate(45deg);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+.map-container-wrapper {
   position: relative;
+  width: 100%;
+  height: 100%;
 }
 
-.diamond-marker::before {
-  content: "";
+.map-toggle-btn {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(-45deg);
-  width: 4px;
-  height: 4px;
-  background-color: #ffffff;
-  border-radius: 50%;
+  top: 20px;
+  right: 20px;
+  z-index: 1000; /* Higher than map to ensure it's clickable */
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
-/* Colors based on magnitude level */
+.map-toggle-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
 
-/*.diamond-marker.magnitude-low {
-  background-color: #4caf50; /* (<2.0) */
-/*}
+.map-toggle-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
 
-.diamond-marker.magnitude-medium {
-  background-color: #ff9800; /* 2.0 to 4.99) */
-/*}
+/* Alternative styles if you prefer mode-specific colors */
+.map-toggle-btn.earthquake-mode {
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+}
 
-.diamond-marker.magnitude-high {
-  background-color: #f44336; /* (>=5.0) */
-/*}
+.map-toggle-btn.hotspot-mode {
+  background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+}
 
-.diamond-marker {
-  animation: pulse 2s infinite;
-}*/
-/*
-@keyframes pulse {
-  0% {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(255, 68, 68, 0.7);
-  }
-  70% {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 8px rgba(255, 68, 68, 0);
-  }
-  100% {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 0 0 0 rgba(255, 68, 68, 0);
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .map-toggle-btn {
+    top: 10px;
+    right: 10px;
+    padding: 10px 16px;
+    font-size: 13px;
   }
 }
-*/
