@@ -6,7 +6,6 @@ import numpy as np
 from sklearn.cluster import KMeans, DBSCAN
 from sklearn.metrics import silhouette_score
 from psycopg2.extras import execute_values
-# matplotlib removed - not needed for clustering
 
 # Load environment variables from .env file
 load_dotenv()
@@ -34,7 +33,7 @@ def fetch_earthquake_data(conn):
 def find_optimal_clusters_elbow(coords, max_k=20):
     """Find optimal number of clusters using elbow method."""
     distortions = []
-    k_range = range(2, min(max_k + 1, len(coords) // 10))  # Don't go crazy with clusters
+    k_range = range(2, min(max_k + 1, len(coords) // 10)) 
     
     for k in k_range:
         kmeans = KMeans(n_clusters=k, random_state=42)

@@ -18,15 +18,15 @@
 
 /* Size-based classes - updated for new data range */
 .cluster-marker.small {
-  background-color: #4caf50; /* Green for small clusters (<200) */
+  background-color: #4caf50;
 }
 
 .cluster-marker.medium {
-  background-color: #ff9800; /* Yellow for medium clusters (200-1000) */
+  background-color: #ff9800;
 }
 
 .cluster-marker.large {
-  background-color: #f44336; /* Orange for large clusters (1000-2500) */
+  background-color: #f44336;
 }
 
 /* Pulse animation with dynamic colors */
