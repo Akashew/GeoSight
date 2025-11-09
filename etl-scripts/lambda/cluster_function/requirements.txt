@@ -1,0 +1,3 @@
+numpy
+pg8000
+scikit-learn
